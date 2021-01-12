@@ -14,18 +14,41 @@ function get_task_list($filter=null){
     include 'connection.php';
     $sql = 'SELECT tasks.*, projects.title AS project FROM tasks'
             . ' JOIN projects ON tasks.project_id = projects.project_id';
-    $orderBy = 'ORDER BY date DESC';
+
+    $where = '';
+    if(is_array($filter)){
+        switch ($filter[0]){
+            case 'project':
+                $where = ' WHERE projects.project_id = ?';
+                break;
+            case 'category':
+                $where = ' WHERE category = ?';
+                break;
+            case 'date':
+                $where = ' WHERE date >= ? AND date <= ?';
+                break;
+        }
+    }
+
+    $orderBy = ' ORDER BY date DESC';
     if($filter){
-        $orderBy = 'ORDER BY projects.title ASC, date DESC';
+        $orderBy = ' ORDER BY projects.title ASC, date DESC';
     }
 
     try{
-       $result = $db->prepare($sql . $orderBy);
+       $result = $db->prepare($sql . $where . $orderBy);
+       if(is_array($filter)){
+           $result -> bindValue(1, $filter[1]); //, PDO::PARAM_INT optional param
+           if($filter[0] == 'date'){
+               $result->bindValue(2,$filter[2], PDO::PARAM_STR);
+           }
+       }
        $result->execute();
     }catch(Exception $e){
         echo "Error: " . $e->getMessage() . "</br>";
         return array(); // not to return notice about not being an arr: the correct data is arr
     }
+    return $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function add_project($title, $category){
