@@ -18,43 +18,43 @@ include 'inc/header.php';
             <form class='form-container form-report' action='reports.php' method='get'>
                 <label for='filter'>Filter:</label>
                 <select id='filter' name='filter'>
-                     <option value=''>Select sth</option>
-                     <optgroup label="Project">
-                     <?php 
-                          foreach(get_project_list() as $item){
-                              echo '<option value="project:' .$item['project_id'] .'">';
-                              echo $item['title'] . "</option>";
-                          }
-                     ?>
-                     </optgroup>
-                     <optgroup label="Category">
-                            <option value="category:Billable">Billable</option>
-                            <option value="category:Charity">Charity</option>
-                            <option value="category:Personal">Personal</option>
-                     </optgroup>
-                     <optgroup label="Date">
-                            <option value="date:<?php 
-                            echo date('d/m/y',strtotime('-2 Monday'));
-                            echo ":";
-                            echo date('d/m/y', strtotime('-1 Sunday'));
-                            ?>"> <?php echo date('d/m/y', strtotime('-1 Monday')); ?></option> 
-                            <!-- //Last Week -->
-                            <option value="date:<?php 
-                            echo date('d/m/y',strtotime('-1 Monday')); // -1 week
-                            echo ":";
-                            echo date('d/m/y');
-                            ?>"><?php echo date('d/m/y'); ?></option>
-                            <option value="date:<?php 
-                            echo date('d/m/y',strtotime('first day of last month'));
-                            echo ":";
-                            echo date('d/m/y', strtotime('last day of last month'));
-                            ?>"><?php echo date('d/m/y', strtotime('last day of last month'))?></option>
-                            <option value="date:<?php 
-                            echo date('d/m/y',strtotime('first day of  next month'));
-                            echo ":";
-                            echo date('d/m/y');
-                            ?>"><?php echo date('d/m/y',strtotime('first day of  next month'))?></option>
-                     </optgroup>
+                    <option value=''>Select sth</option>
+                    <optgroup label="Project">
+                    <?php 
+                        foreach(get_project_list() as $item){
+                            echo '<option value="project:' .$item['project_id'] .'">';
+                            echo $item['title'] . "</option>";
+                        }
+                    ?>
+                    </optgroup>
+                    <optgroup label="Category">
+                        <option value="category:Billable">Billable</option>
+                        <option value="category:Charity">Charity</option>
+                        <option value="category:Personal">Personal</option>
+                    </optgroup>
+                    <optgroup label="Date">
+                        <option value="date:<?php 
+                        echo date('d/m/y',strtotime('-2 Monday'));
+                        echo ":";
+                        echo date('d/m/y', strtotime('-1 Sunday'));
+                        ?>"> <?php echo date('d/m/y', strtotime('-1 Monday')); ?></option> 
+                        <!-- //Last Week -->
+                        <option value="date:<?php 
+                        echo date('d/m/y',strtotime('-1 Monday')); // -1 week
+                        echo ":";
+                        echo date('d/m/y');
+                        ?>"><?php echo date('d/m/y'); ?></option>
+                        <option value="date:<?php 
+                        echo date('d/m/y',strtotime('first day of last month'));
+                        echo ":";
+                        echo date('d/m/y', strtotime('last day of last month'));
+                        ?>"><?php echo date('d/m/y', strtotime('last day of last month'))?></option>
+                        <option value="date:<?php 
+                        echo date('d/m/y',strtotime('first day of  next month'));
+                        echo ":";
+                        echo date('d/m/y');
+                        ?>"><?php echo date('d/m/y',strtotime('first day of  next month'))?></option>
+                    </optgroup>
                 </select>
                 <input class="button" type="submit" value="kuku" />
             </form>
